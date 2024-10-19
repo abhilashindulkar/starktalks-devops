@@ -1,0 +1,63 @@
+# Login to the machine
+ssh -i <PRIVATE-KEY> ec2-user@<HOSTNAME'S PUBLIC-IP>
+
+# Check OS config
+cat /etc/os-release
+
+# Install Java
+sudo yum install java -y
+java -version
+
+# Find Java's home path and export it
+find / -name java
+export JAVA_HOME=/usr/lib/jvm/java-22-amazon-corretto.x86_64
+echo $JAVA_HOME
+
+# Download Tomcat & Unzip
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.96/bin/apache-tomcat-9.0.96.zip
+ls
+unzip apache-tomcat-9.0.96.zip 
+
+# Create multiple instances of tomcat
+cp -r apache-tomcat-9.0.96 apache-tomcat2
+mv apache-tomcat-9.0.96 apache-tomcat1
+
+# Give executable permissions to script binaries
+
+chmod +x apache-tomcat1/bin/*.sh
+chmod +x apache-tomcat2/bin/*.sh
+
+# Configure server.xml
+cd apache-tomcat1/conf/
+vi server.xml 
+cd apache-tomcat2/conf/
+vi server.xml 
+
+# Start Tomcat
+./startup.sh 
+cd ../../apache-tomcat1/bin/
+./startup.sh 
+
+# Check Processes 
+ps -ef | grep tomcat
+
+# Fetch Instance's Public IP
+echo $(curl ifconfig.me)
+
+# Install NGINX
+sudo yum install nginx -y
+nginx -version
+
+# Check Status and start
+sudo service nginx status
+sudo service nginx start
+
+# Configure nginx webserver
+sudo su -
+vi /etc/nginx/nginx.conf
+
+# Check nginx configuration syntax
+nginx -t
+
+# Reload configuration
+sudo service nginx reload
