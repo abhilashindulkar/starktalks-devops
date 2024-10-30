@@ -1,5 +1,8 @@
 # Deploy a Sample JAVA web application on tomcat application server - Ubuntu/Debian
 
+[![Watch the video](https://img.youtube.com/vi/Vi56xFX10iI&t=4s/0.jpg)](https://www.youtube.com/watch?v=Vi56xFX10iI&t=4s)
+
+
 1. Provision a Linux - Debian 12 virual machine. (GCP Compute Engine). Use EC2 for AWS, Virtual Machine for Microsoft Azure.
 
 2. Download Tomcat's binary by visiting https://tomcat.apache.org/ page.
